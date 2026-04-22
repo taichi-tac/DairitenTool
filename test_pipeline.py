@@ -65,13 +65,13 @@ async def main():
     print("\n[4/4] 品質ゲート実行中...")
     from quality.gates import QualityGates
     gates = QualityGates()
-    result = gates.constitutional_review(chapter)
+    result = gates.constitutional_review(chapter, current_date="2026-04-22")
     print(f"      → Constitutional Review: {'PASS' if result.severity == 'ok' else result.severity.upper()}")
     if result.violations:
         for v in result.violations[:2]:
             print(f"        ! {v}")
 
-    score = await gates.score(chapter)
+    score = await gates.score(chapter, current_date="2026-04-22")
     print(f"      → 品質スコア: {score.overall}/5.0 ({'PASS' if score.passed else 'FAIL'})")
     print(f"        正確性={score.accuracy} 読みやすさ={score.readability} 独自性={score.originality}")
     print(f"        実用性={score.value} ブランド安全={score.brand_safety}")
