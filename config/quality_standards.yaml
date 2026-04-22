@@ -1,0 +1,72 @@
+book_standards:
+  min_total_words: 27500         # 2500語 × 11章
+  min_chapter_words: 2500
+  chapters_per_book: 11
+  cta_placeholder: "[COURSE_CTA_PLACEHOLDER]"
+  ai_disclosure_text: |
+    本書はAI（人工知能）を活用して執筆され、編集・品質確認を経て出版されています。
+    これはAI活用の透明性確保のためのご案内です（Amazon KDP AI開示要件準拠）。
+
+quality_gates:
+  constitutional:
+    # hard_fail: 即座にリジェクト（リトライなし）
+    hard_fail_rules:
+      - BRAND-001  # ブランド毀損コンテンツ（誹謗中傷・不当競争）
+      - BRAND-002  # 根拠なし断定（「必ず稼げます」等）
+      - LEGAL-001  # 著作権侵害リスク（長文直接引用）
+    # warn: 自動修正対象（最大max_revisions回）
+    warn_rules:
+      - FACT-001   # 明らかなハルシネーション
+      - FACT-002   # 出典なし数値に断定表現
+      - QUALITY-001 # 2500語未満
+      - QUALITY-002 # 具体的ツール名・手順が3箇所未満
+      - QUALITY-003 # 「今すぐできるアクション」セクションなし
+    max_revisions: 2
+
+  scoring:
+    thresholds:
+      accuracy: 4.2
+      readability: 4.0
+      originality: 4.0
+      value: 4.2
+      brand_safety: 4.5
+    overall_threshold: 4.2
+    # 加重平均の重み（合計1.0）
+    weights:
+      accuracy: 0.25
+      readability: 0.20
+      originality: 0.20
+      value: 0.25
+      brand_safety: 0.10
+
+brand:
+  course_name: "初心者向けAI副業オンライン講座"
+  tone:
+    - "親しみやすい"
+    - "実践的"
+    - "希望が持てる"
+    - "誠実"
+    - "具体的"
+  forbidden_phrases:
+    - "必ず稼げます"
+    - "誰でも月100万"
+    - "すぐに稼げる"
+    - "他の講座とは違い"
+    - "絶対に稼げる"
+    - "100%成功"
+    - "詐欺ではありません"
+    - "元手ゼロで"
+
+models:
+  topic_planning: "claude-haiku-4-5-20251001"
+  chapter_generation: "claude-sonnet-4-6"
+  constitutional_review: "claude-sonnet-4-6"
+  scoring_fast: "claude-haiku-4-5-20251001"
+  scoring_quality: "claude-sonnet-4-6"
+  revision: "claude-sonnet-4-6"
+
+pipeline:
+  max_parallel_chapters: 3      # Claude APIレート制限対策
+  max_parallel_variants: 5      # 代理店バリアント並列生成数
+  max_parallel_sources: 10      # RSS並列フェッチ数
+  cost_limit_usd_per_run: 3.0  # 1回あたりコスト上限（超過でSlack警告）

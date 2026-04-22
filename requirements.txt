@@ -1,0 +1,36 @@
+# KDP代理店書籍自動化パイプライン - Python依存関係
+# インストール: pip install -r requirements.txt
+
+# === Claude API ===
+anthropic>=0.40.0
+
+# === 情報収集 ===
+feedparser>=6.0.11
+httpx[asyncio]>=0.27.0
+python-dateutil>=2.9.0
+
+# === Apache Airflow ===
+# Airflow本体はPyPIからインストール:
+# pip install "apache-airflow==2.9.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.0/constraints-3.11.txt"
+apache-airflow>=2.9.0
+
+# === Supabase ===
+supabase>=2.3.0
+
+# === メール通知 ===
+resend>=0.7.0
+
+# === EPUB/PDF生成 ===
+# Pandoc はシステムにインストール必須（pip では入らない）
+# Windows: winget install JohnMacFarlane.Pandoc
+# macOS:   brew install pandoc
+# Ubuntu:  apt-get install pandoc
+PyYAML>=6.0.1
+
+# === QRコード ===
+qrcode[pil]>=7.4.2
+Pillow>=10.0.0
+
+# === 設定・ユーティリティ ===
+python-dotenv>=1.0.0
+pydantic>=2.0.0
