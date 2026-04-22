@@ -17,32 +17,27 @@ class NewsSource:
 TIER_1_SOURCES: list[NewsSource] = [
     NewsSource("arXiv AI", "https://arxiv.org/rss/cs.AI", 1.0, "AI研究", "en"),
     NewsSource("MIT Technology Review", "https://www.technologyreview.com/feed/", 1.0, "AI技術", "en"),
-    NewsSource("Wired AI", "https://www.wired.com/feed/tag/artificial-intelligence/rss", 1.0, "AI技術", "en"),
     NewsSource("TechCrunch AI", "https://techcrunch.com/category/artificial-intelligence/feed/", 1.0, "AIビジネス", "en"),
-    NewsSource("Anthropic Blog", "https://www.anthropic.com/rss.xml", 1.0, "AI開発", "en"),
-    NewsSource("OpenAI Blog", "https://openai.com/blog/rss.xml", 1.0, "AI開発", "en"),
+    NewsSource("OpenAI Blog", "https://openai.com/news/rss.xml", 1.0, "AI開発", "en"),
     NewsSource("Google AI Blog", "https://blog.research.google/atom.xml", 1.0, "AI研究", "en"),
+    NewsSource("The Verge AI", "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", 1.0, "AIビジネス", "en"),
 ]
 
 # 高信頼度 (trust_score=0.85): 信頼性の高い業界メディア・コミュニティ
 TIER_2_SOURCES: list[NewsSource] = [
-    NewsSource("HackerNews", "https://hnrss.org/frontpage", 0.85, "テック全般", "en"),
-    NewsSource("The Verge AI", "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", 0.85, "AIビジネス", "en"),
+    NewsSource("HackerNews Top", "https://hnrss.org/newest?points=100", 0.85, "テック全般", "en"),
     NewsSource("VentureBeat AI", "https://venturebeat.com/category/ai/feed/", 0.85, "AIビジネス", "en"),
-    NewsSource("a16z Blog", "https://a16z.com/feed/", 0.85, "AIスタートアップ", "en"),
     NewsSource("Product Hunt", "https://www.producthunt.com/feed", 0.85, "新AIツール", "en"),
-    NewsSource("Ben's Bites", "https://bensbites.beehiiv.com/feed", 0.85, "AI副業活用", "en"),
-    NewsSource("AI Tool Report", "https://aitoolreport.beehiiv.com/feed", 0.85, "AIツール", "en"),
+    NewsSource("InfoQ AI", "https://feed.infoq.com/", 0.85, "AIエンジニアリング", "en"),
+    NewsSource("AI News", "https://www.artificialintelligence-news.com/feed/", 0.85, "AIビジネス", "en"),
 ]
 
 # 参考 (trust_score=0.7): アジア圏・日本語・コミュニティ系
 TIER_3_SOURCES: list[NewsSource] = [
     NewsSource("TechNode (中国AI英語版)", "https://technode.com/feed/", 0.7, "アジアAI", "en"),
-    NewsSource("e27 (東南アジア)", "https://e27.co/feed/", 0.7, "アジアAIビジネス", "en"),
     NewsSource("KrASIA", "https://kr-asia.com/feed", 0.7, "アジアテック", "en"),
     NewsSource("Zenn トレンド", "https://zenn.dev/feed", 0.7, "日本AI開発", "ja"),
     NewsSource("Qiita トレンド", "https://qiita.com/trend.atom", 0.7, "日本AI開発", "ja"),
-    NewsSource("note AI", "https://note.com/hashtag/AI.rss", 0.7, "日本AI副業", "ja"),
 ]
 
 ALL_SOURCES: list[NewsSource] = TIER_1_SOURCES + TIER_2_SOURCES + TIER_3_SOURCES

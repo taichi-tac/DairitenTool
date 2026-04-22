@@ -100,16 +100,27 @@ class TopicPlanner:
         logger.info("書籍計画生成中 date=%s category=%s", date_str, topic_category)
         response = self.client.messages.create(
             model="claude-haiku-4-5-20251001",
-            max_tokens=2000,
+            max_tokens=4096,  # 11章分のJSONは2000では不足するため増量
             messages=[{"role": "user", "content": prompt}],
         )
 
         raw = response.content[0].text.strip()
-        # JSONブロックが```json...```で囲まれている場合に対応
-        if raw.startswith("```"):
-            raw = raw.split("```")[1]
-            if raw.startswith("json"):
-                raw = raw[4:]
+        # ```json ... ``` ブロックの除去
+        if "```" in raw:
+            parts = raw.split("```")
+            for part in parts:
+                if part.startswith("json"):
+                    raw = part[4:].strip()
+                    break
+                elif part.strip().startswith("{"):
+                    raw = part.strip()
+                    break
+
+        # JSONの先頭・末尾を { } で切り出す（前後に余分なテキストがある場合）
+        start = raw.find("{")
+        end = raw.rfind("}") + 1
+        if start >= 0 and end > start:
+            raw = raw[start:end]
 
         try:
             data = json.loads(raw)
